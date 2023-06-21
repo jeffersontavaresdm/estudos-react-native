@@ -38,7 +38,7 @@ const AuthenticationActions = (
   const handleDeletar = async () => {
     try {
       await firebaseAuthenticationService.deletarContaComEmailSenha(email, senha);
-      setUserConected(false)
+      setUserConected(false);
       closeModal();
     } catch (error) {
       console.error("Erro ao deletar conta:", error.message);
@@ -55,6 +55,16 @@ const AuthenticationActions = (
     }
 
     setUserConected(true);
+  };
+
+  const handleSair = async () => {
+    try {
+      setUser(await firebaseAuthenticationService.desconectarComEmailSenha(email, senha));
+      setUserConected(false);
+      closeModal();
+    } catch (error) {
+      console.error("Erro ao conectar-se:", error.message);
+    }
   };
 
   return (
@@ -87,6 +97,7 @@ const AuthenticationActions = (
                   handleCadastro={handleCadastro}
                   handleDeletar={handleDeletar}
                   handleEntrar={handleEntrar}
+                  handleSair={handleSair}
                 />
                 <TouchableOpacity
                   style={[styles.modalButton, { marginLeft: 8, backgroundColor: "gray" }]}

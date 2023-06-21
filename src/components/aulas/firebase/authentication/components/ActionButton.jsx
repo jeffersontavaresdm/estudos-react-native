@@ -8,6 +8,7 @@ const ActionButton = (
     handleCadastro,
     handleDeletar,
     handleEntrar,
+    handleSair,
   },
 ) => {
   switch (actionType) {
@@ -38,6 +39,16 @@ const ActionButton = (
           onPress={handleEntrar}
         >
           <Text style={styles.buttonText}>Entrar</Text>
+        </TouchableOpacity>
+      );
+    }
+    case "desconectar" : {
+      return (
+        <TouchableOpacity
+          style={[styles.modalButton, { backgroundColor: "darkred" }]}
+          onPress={handleSair}
+        >
+          <Text style={styles.buttonText}>Sair</Text>
         </TouchableOpacity>
       );
     }

@@ -36,7 +36,14 @@ const FirebaseAuthMenu = () => {
         onPress={() => openModal(ModalActions.CONECTAR)}
         disabled={userConected}
       >
-        <Text style={styles.buttonText}>Entrar</Text>
+        <Text style={styles.buttonText}>Sign in</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={[styles.button, { backgroundColor: "darkred", opacity: !userConected ? 0.5 : 1 }]}
+        onPress={() => openModal(ModalActions.DESCONECTAR)}
+        disabled={!userConected}
+      >
+        <Text style={styles.buttonText}>Sign out</Text>
       </TouchableOpacity>
       <AuthenticationActions
         modalIsVisible={modalIsVisible}

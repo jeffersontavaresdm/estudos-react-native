@@ -1,5 +1,5 @@
 import { firebaseAuth } from "../../../../../config/firebase.configs";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 class FirebaseAuthenticationService {
   _firebaseAuth;
@@ -29,6 +29,16 @@ class FirebaseAuthenticationService {
     return signInWithEmailAndPassword(this._firebaseAuth, email, senha)
       .then((userCredential) => userCredential.user)
       .catch(error => console.error(error));
+  }
+
+  async desconectarComEmailSenha(email, senha) {
+    try {
+      await signInWithEmailAndPassword(this._firebaseAuth, email, senha);
+      await signOut(this._firebaseAuth);
+      console.log("Usuário desconectado com sucesso!");
+    } catch (error) {
+      console.error("Erro ao desconectar usuário:", error.message);
+    }
   }
 }
 
