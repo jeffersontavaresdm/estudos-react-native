@@ -56,6 +56,17 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: "center",
   },
+  userText: {
+    fontSize: 14,
+    fontWeight: "bold",
+    marginBottom: 8,
+  },
+  userModalHeader: {
+    color: "#000",
+    fontSize: 36,
+    marginBottom: 12,
+    fontWeight: "bold",
+  },
 });
 
 export default styles;

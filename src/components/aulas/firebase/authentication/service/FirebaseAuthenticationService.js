@@ -24,6 +24,12 @@ class FirebaseAuthenticationService {
       })
       .catch(error => console.error(error));
   }
+
+  conectarComEmailSenha(email, senha) {
+    return signInWithEmailAndPassword(this._firebaseAuth, email, senha)
+      .then((userCredential) => userCredential.user)
+      .catch(error => console.error(error));
+  }
 }
 
 export default new FirebaseAuthenticationService(firebaseAuth);
