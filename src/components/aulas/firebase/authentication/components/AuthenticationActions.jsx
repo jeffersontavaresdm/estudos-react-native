@@ -111,7 +111,7 @@ const AuthenticationActions = (
             <View style={styles.modalContent}>
               <Card>
                 {
-                  actionType !== ModalActions.DELETAR && (
+                  actionType === ModalActions.CRIAR && (
                     <TextInput
                       style={styles.input}
                       placeholder="Nome"
