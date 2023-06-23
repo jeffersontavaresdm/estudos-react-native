@@ -3,11 +3,13 @@ import { Text, TouchableOpacity, View } from "react-native";
 import styles from "../styles/firebaseAuthMenu.styles";
 import AuthenticationActions from "./AuthenticationActions";
 import { ModalActions } from "./modalActions";
+import firebaseAuthenticationService from "../service/FirebaseAuthenticationService";
 
 const FirebaseAuthMenu = () => {
   const [modalIsVisible, setModalIsVisible] = useState(false);
   const [actionType, setActionType] = useState("");
   const [userConected, setUserConected] = React.useState(false);
+  const [thereAreNoUsers, setThereAreNoUsers] = React.useState(true);
 
   const openModal = (type) => {
     setActionType(type);
@@ -23,13 +25,14 @@ const FirebaseAuthMenu = () => {
         style={[styles.button, { backgroundColor: "darkblue" }]}
         onPress={() => openModal(ModalActions.CRIAR)}
       >
-        <Text style={styles.buttonText}>Criar Conta</Text>
+        <Text style={styles.buttonText}>Create Account</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        style={[styles.button, { backgroundColor: "red" }]}
+        style={[styles.button, { backgroundColor: "red", opacity: thereAreNoUsers ? 0.5 : 1 }]}
         onPress={() => openModal(ModalActions.DELETAR)}
+        disabled={thereAreNoUsers}
       >
-        <Text style={styles.buttonText}>Deletar Conta</Text>
+        <Text style={styles.buttonText}>Delete Account</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={[styles.button, { backgroundColor: "darkgreen", opacity: userConected ? 0.5 : 1 }]}
@@ -50,6 +53,7 @@ const FirebaseAuthMenu = () => {
         setModalIsVisible={setModalIsVisible}
         actionType={actionType}
         setUserConected={setUserConected}
+        setThereAreNoUsers={setThereAreNoUsers}
       />
     </View>
   );

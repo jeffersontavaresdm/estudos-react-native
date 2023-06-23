@@ -1,4 +1,4 @@
-import API from "./API";
+import API from './API';
 
 class Service {
   api;
@@ -11,7 +11,7 @@ class Service {
     return this.api
       .get(`/${cep}/json`)
       .then(cep => cep.data)
-      .catch((error) => error);
+      .catch(error => error);
   }
 }
 

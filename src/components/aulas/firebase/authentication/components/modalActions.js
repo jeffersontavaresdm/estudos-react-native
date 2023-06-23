@@ -1,6 +1,6 @@
 export const ModalActions = {
-  CRIAR: "criar",
-  DELETAR: "deletar",
-  CONECTAR: "conectar",
-  DESCONECTAR: "desconectar",
+  CRIAR: 'criar',
+  DELETAR: 'deletar',
+  CONECTAR: 'conectar',
+  DESCONECTAR: 'desconectar',
 };

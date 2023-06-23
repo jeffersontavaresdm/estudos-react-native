@@ -1,19 +1,19 @@
-import { initializeApp } from "firebase/app";
-import { getDatabase } from "firebase/database";
-import { getAuth } from "firebase/auth";
+import {initializeApp} from 'firebase/app';
+import {getDatabase} from 'firebase/database';
+import {getAuth} from 'firebase/auth';
 
 // Pegar as configs em:
 // https://console.firebase.google.com/u/0/project/<nome-do-projeto>-<code>/settings/general/web:<token>
 // Path: https://console.firebase.google.com/u/0/ -> projeto -> clica no projeto e na engrenagem.
 const firebaseConfig = {
-  apiKey: "...",
-  authDomain: "...",
-  databaseURL: "...",
-  projectId: "...",
-  storageBucket: "...",
-  messagingSenderId: "...",
-  appId: "...",
-  measurementId: "...",
+  apiKey: '...',
+  authDomain: '...',
+  databaseURL: '...',
+  projectId: '...',
+  storageBucket: '...',
+  messagingSenderId: '...',
+  appId: '...',
+  measurementId: '...',
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
@@ -24,4 +24,4 @@ const firebaseDB = getDatabase(firebaseApp);
 // Authentication
 const firebaseAuth = getAuth(firebaseApp);
 
-export { firebaseApp, firebaseDB, firebaseAuth };
+export {firebaseApp, firebaseDB, firebaseAuth};
