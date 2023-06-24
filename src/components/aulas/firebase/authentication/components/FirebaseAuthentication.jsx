@@ -5,7 +5,7 @@ import AuthenticationActions from "./AuthenticationActions";
 import { ModalActions } from "./modalActions";
 import firebaseAuthenticationService from "../service/FirebaseAuthenticationService";
 
-const FirebaseAuthMenu = () => {
+const FirebaseAuthentication = () => {
   const [modalIsVisible, setModalIsVisible] = useState(false);
   const [actionType, setActionType] = useState("");
   const [userConected, setUserConected] = React.useState(false);
@@ -59,4 +59,4 @@ const FirebaseAuthMenu = () => {
   );
 };
 
-export default FirebaseAuthMenu;
+export default FirebaseAuthentication;

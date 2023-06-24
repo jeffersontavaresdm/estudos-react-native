@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
-import 'react-native-gesture-handler';
-import FirebaseAuthMenu from './components/aulas/firebase/authentication/components/FirebaseAuthMenu';
+import "react-native-gesture-handler";
+import UseContext from "./components/aulas/hooks/hook_05/UseContext";
 
 export default function App() {
-  return <FirebaseAuthMenu />;
+  return <UseContext />;
 }

@@ -1,12 +1,12 @@
 import React from "react";
-import ComponentePai from "./ComponentePai";
+import PrimeiroComponente from "./PrimeiroComponente";
 import { Text, View } from "react-native";
 
 const UseContext = () => {
   return (
     <View>
       <Text>Exemplo do useContext{"\n"}</Text>
-      <ComponentePai />
+      <PrimeiroComponente />
     </View>
   );
 };

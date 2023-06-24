@@ -1,8 +1,8 @@
 import React from "react";
 import { Keyboard, Modal, Text, TextInput, TouchableOpacity, View } from "react-native";
-import styles from "./styles/firebaseTest.styles";
+import styles from "../styles/firebaseTest.styles";
 import AntDesign from "react-native-vector-icons/AntDesign";
-import firebaseDB from "./config/database";
+import firebaseDB from "../service/FirebaseDatabaseService";
 
 const CriarUsuario = ({ modalVisible, setModalVisible, setUsuarios }) => {
   const [usuario, setUsuario] = React.useState({ nome: "", idade: 0 });

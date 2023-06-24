@@ -1,12 +1,12 @@
 import React from "react";
 import { SafeAreaView, Text, TouchableOpacity } from "react-native";
-import firebaseDB from "./config/database";
+import firebaseDB from "../service/FirebaseDatabaseService";
 import ListaUsuarios from "./ListaUsuarios";
-import styles from "./styles/firebaseTest.styles";
+import styles from "../styles/firebaseTest.styles";
 import CriarUsuario from "./CriarUsuario";
 import DeletarUsuario from "./DeletarUsuario";
 
-const FirebaseTest = () => {
+const FirebaseDatabase = () => {
   const [usuarios, setUsuarios] = React.useState([]);
   const [listarUsuariosModal, setListarUsuariosModal] = React.useState(false);
   const [criarUsuariosModal, setCriarUsuarioModal] = React.useState(false);
@@ -57,4 +57,4 @@ const FirebaseTest = () => {
   );
 };
 
-export default FirebaseTest;
+export default FirebaseDatabase;

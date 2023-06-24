@@ -1,7 +1,7 @@
 import {get, onValue, push, ref, remove, set} from 'firebase/database';
 import {firebaseDB} from '../../../../../config/firebase.configs';
 
-class FirebaseRealDB {
+class FirebaseDatabaseService {
   _firebaseDB;
 
   constructor(firebaseDatabase) {
@@ -107,4 +107,4 @@ class FirebaseRealDB {
   }
 }
 
-export default new FirebaseRealDB(firebaseDB);
+export default new FirebaseDatabaseService(firebaseDB);

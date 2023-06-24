@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Modal, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
-import firebaseDB from "./config/database";
+import firebaseDB from "../service/FirebaseDatabaseService";
 
 const DeletarUsuario = ({ modalVisible, setModalVisible, setUsuarios }) => {
   const [nome, setNome] = useState("");
