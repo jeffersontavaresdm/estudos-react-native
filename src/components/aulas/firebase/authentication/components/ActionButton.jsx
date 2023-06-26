@@ -1,5 +1,5 @@
 import { Text, TouchableOpacity } from "react-native";
-import styles from "../styles/firebaseComponentStyles";
+import styles from "../styles/firebaseComponent.styles";
 import React from "react";
 import { ModalActions } from "./modalActions";
 

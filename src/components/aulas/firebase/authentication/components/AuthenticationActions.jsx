@@ -1,5 +1,5 @@
 import { Modal, Text, TextInput, TouchableOpacity, View } from "react-native";
-import styles from "../styles/firebaseComponentStyles";
+import styles from "../styles/firebaseComponent.styles";
 import React from "react";
 import firebaseAuthenticationService from "../service/FirebaseAuthenticationService";
 import Card from "../../../../outros/card/Card";

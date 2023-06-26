@@ -2,7 +2,7 @@ import React from "react";
 import { FlatList, Modal, Text, TouchableOpacity, View } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Card from "../../../../outros/card/Card";
-import styles from "../styles/firebaseTest.styles";
+import styles from "../styles/firebaseDatabase.styles";
 
 const ListaUsuarios = ({ modalVisible, setModalVisible, usuarios }) => {
   const renderItem = ({ item }) => (

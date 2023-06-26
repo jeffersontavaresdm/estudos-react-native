@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal, Text, TouchableOpacity, View } from "react-native";
-import styles from "../styles/firebaseComponentStyles";
+import styles from "../styles/firebaseComponent.styles";
 import Card from "../../../../outros/card/Card";
 
 const UserData = ({ userModalIsVisible, user, closeModal }) => {

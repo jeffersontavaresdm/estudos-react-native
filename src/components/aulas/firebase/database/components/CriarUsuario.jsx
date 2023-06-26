@@ -1,6 +1,6 @@
 import React from "react";
 import { Keyboard, Modal, Text, TextInput, TouchableOpacity, View } from "react-native";
-import styles from "../styles/firebaseTest.styles";
+import styles from "../styles/firebaseDatabase.styles";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import firebaseDB from "../service/FirebaseDatabaseService";
 

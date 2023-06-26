@@ -2,7 +2,7 @@ import React from "react";
 import { SafeAreaView, Text, TouchableOpacity } from "react-native";
 import firebaseDB from "../service/FirebaseDatabaseService";
 import ListaUsuarios from "./ListaUsuarios";
-import styles from "../styles/firebaseTest.styles";
+import styles from "../styles/firebaseDatabase.styles";
 import CriarUsuario from "./CriarUsuario";
 import DeletarUsuario from "./DeletarUsuario";
 
