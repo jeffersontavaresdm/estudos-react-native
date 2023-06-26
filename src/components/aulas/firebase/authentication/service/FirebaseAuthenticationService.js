@@ -34,13 +34,15 @@ class FirebaseAuthenticationService {
       .catch(error => error);
   }
 
-  cadastrarComEmailSenha(email, password, name) {
+  async cadastrarComEmailSenha(email, password, name) {
     return createUserWithEmailAndPassword(firebaseAuth, email, password)
       .then(async userCredentials => {
+        let user = userCredentials.user;
+        let data = {id: user.uid, name: name, email: user.email};
         let userReferences = ref(firebaseDB, 'usuarios');
-        let userReference = child(userReferences, userCredentials.user.uid);
-        await set(userReference, {nome: name});
-        return userCredentials.user;
+        let userReference = child(userReferences, user.uid);
+        await set(userReference, data);
+        return user;
       })
       .catch(error => error);
   }
@@ -48,12 +50,12 @@ class FirebaseAuthenticationService {
   deletarContaComEmailSenha(email, senha) {
     return signInWithEmailAndPassword(this._firebaseAuth, email, senha)
       .then(userCredentials => {
-        let userUID = userCredentials.user.uid;
-        return userCredentials.user
+        let user = userCredentials.user;
+        return user
           .delete()
           .then(async () => {
             let userReferences = ref(firebaseDB, 'usuarios');
-            let userReference = child(userReferences, userUID);
+            let userReference = child(userReferences, user.uid);
             await set(userReference, null);
             return true;
           })
@@ -78,7 +80,7 @@ class FirebaseAuthenticationService {
         },
       );
     } catch (error) {
-      console.log(`Erro ao desconectar. Error:\n${error}`);
+      console.error(`Erro ao desconectar. Error:\n${error}`);
     }
 
     return isOk;

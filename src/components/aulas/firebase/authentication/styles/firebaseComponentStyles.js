@@ -51,7 +51,6 @@ const styles = StyleSheet.create({
   },
   modalButton: {
     flex: 1,
-    backgroundColor: 'red',
     padding: 10,
     borderRadius: 8,
     alignItems: 'center',

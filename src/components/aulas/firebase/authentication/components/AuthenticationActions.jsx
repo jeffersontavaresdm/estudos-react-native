@@ -1,11 +1,12 @@
 import { Modal, Text, TextInput, TouchableOpacity, View } from "react-native";
-import styles from "../styles/firebaseAuthMenu.styles";
+import styles from "../styles/firebaseComponentStyles";
 import React from "react";
 import firebaseAuthenticationService from "../service/FirebaseAuthenticationService";
 import Card from "../../../../outros/card/Card";
 import ActionButton from "./ActionButton";
 import UserData from "./UserData";
 import { ModalActions } from "./modalActions";
+import AccountList from "./AccountList";
 
 const AuthenticationActions = (
     {
@@ -14,6 +15,8 @@ const AuthenticationActions = (
       actionType,
       setUserConected,
       setThereAreNoUsers,
+      users,
+      setUsers,
     },
   ) => {
     const [email, setEmail] = React.useState("");
@@ -21,15 +24,14 @@ const AuthenticationActions = (
     const [name, setName] = React.useState("");
     const [user, setUser] = React.useState(null);
     const [userModalIsVisible, setUserModalIsVisible] = React.useState(false);
-    const [userCount, setUserCount] = React.useState(0);
 
     React.useEffect(() => {
-      if (userCount === 0) {
+      if (users.length === 0) {
         setThereAreNoUsers(true);
       } else {
         setThereAreNoUsers(false);
       }
-    }, [userCount]);
+    }, [users]);
 
     const closeModal = () => {
       setName("");
@@ -40,32 +42,38 @@ const AuthenticationActions = (
     };
 
     const handleCadastro = async () => {
-      try {
-        let userOrError = await firebaseAuthenticationService.cadastrarComEmailSenha(email, password, name);
+      if (!email || !password || !name) {
+        console.error("Preencha todos os dados");
+        return;
+      }
 
-        if (userOrError.email === email) {
-          setUserCount(prevState => prevState + 1);
+      try {
+        let result = await firebaseAuthenticationService.cadastrarComEmailSenha(email, password, name);
+
+        if (result) {
           console.log("Usuário cadastrado com sucesso!");
+          setUsers((prevUsers) => [...prevUsers, user]);
+          setUser(user);
         } else {
-          console.error(`Usuário não cadastrado. Error: ${userOrError.code}`);
+          console.error(`Usuário não cadastrado. Error: ${result.code}`);
         }
 
         closeModal();
       } catch (error) {
-        console.error("Erro ao cadastrar usuário:", error.message);
+        console.error("Erro ao cadastrar usuário", error.message);
       }
     };
 
     const handleDeletar = async () => {
       try {
-        const deletedAccount = await firebaseAuthenticationService.deletarContaComEmailSenha(email, password);
+        const accountIsDeleted = await firebaseAuthenticationService.deletarContaComEmailSenha(email, password);
 
-        if (deletedAccount) {
+        if (accountIsDeleted) {
           console.log("Conta deletada com sucesso!");
-          setUserCount((prevState) => prevState - 1);
           setUserConected(false);
         }
 
+        setUsers(await firebaseAuthenticationService.listarUsuarios());
         closeModal();
       } catch (error) {
         console.error("Erro ao deletar conta:", error.message);
@@ -100,68 +108,70 @@ const AuthenticationActions = (
     };
 
     return (
-      <View>
-        <Modal
-          visible={modalIsVisible}
-          animationType="slide"
-          transparent={true}
-          onRequestClose={closeModal}
-        >
-          <View style={styles.modalContainer}>
-            <View style={styles.modalContent}>
-              <Card>
-                {
-                  actionType === ModalActions.CRIAR && (
-                    <TextInput
-                      style={styles.input}
-                      placeholder="Nome"
-                      value={name}
-                      onChangeText={(text) => setName(text)}
-                    />
-                  )
-                }
-                <TextInput
-                  style={styles.input}
-                  placeholder="Email"
-                  value={email}
-                  onChangeText={(text) => setEmail(text)}
-                />
-                <TextInput
-                  style={styles.input}
-                  placeholder="Senha"
-                  secureTextEntry={true}
-                  value={password}
-                  onChangeText={(text) => setPassword(text)}
-                />
-                <View style={{ flexDirection: "row" }}>
-                  <ActionButton
-                    actionType={actionType}
-                    handleCadastro={handleCadastro}
-                    handleDeletar={handleDeletar}
-                    handleEntrar={handleEntrar}
-                    handleSair={handleSair}
+      actionType === ModalActions.LISTAR
+        ? <AccountList modalIsVisible={modalIsVisible} closeModal={closeModal} />
+        : <>
+          <Modal
+            visible={modalIsVisible}
+            animationType="slide"
+            transparent={true}
+            onRequestClose={closeModal}
+          >
+            <View style={styles.modalContainer}>
+              <View style={styles.modalContent}>
+                <Card>
+                  {
+                    actionType === ModalActions.CRIAR && (
+                      <TextInput
+                        style={styles.input}
+                        placeholder="Nome"
+                        value={name}
+                        onChangeText={(text) => setName(text)}
+                      />
+                    )
+                  }
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Email"
+                    value={email}
+                    onChangeText={(text) => setEmail(text)}
                   />
-                  <TouchableOpacity
-                    style={[styles.modalButton, { marginLeft: 8, backgroundColor: "gray" }]}
-                    onPress={closeModal}
-                  >
-                    <Text style={styles.buttonText}>Cancelar</Text>
-                  </TouchableOpacity>
-                </View>
-              </Card>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Senha"
+                    secureTextEntry={true}
+                    value={password}
+                    onChangeText={(text) => setPassword(text)}
+                  />
+                  <View style={{ flexDirection: "row" }}>
+                    <ActionButton
+                      actionType={actionType}
+                      handleCadastro={handleCadastro}
+                      handleDeletar={handleDeletar}
+                      handleEntrar={handleEntrar}
+                      handleSair={handleSair}
+                    />
+                    <TouchableOpacity
+                      style={[styles.modalButton, { marginLeft: 8, backgroundColor: "gray" }]}
+                      onPress={closeModal}
+                    >
+                      <Text style={styles.buttonText}>Cancelar</Text>
+                    </TouchableOpacity>
+                  </View>
+                </Card>
+              </View>
             </View>
-          </View>
-        </Modal>
-        {
-          user && (
-            <UserData
-              userModalIsVisible={userModalIsVisible}
-              user={user}
-              closeModal={closeModal}
-            />
-          )
-        }
-      </View>
+          </Modal>
+          {
+            user && (
+              <UserData
+                userModalIsVisible={userModalIsVisible}
+                user={user}
+                closeModal={closeModal}
+              />
+            )
+          }
+        </>
     );
   }
 ;

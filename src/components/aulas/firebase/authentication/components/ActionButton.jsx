@@ -1,6 +1,7 @@
 import { Text, TouchableOpacity } from "react-native";
-import styles from "../styles/firebaseAuthMenu.styles";
+import styles from "../styles/firebaseComponentStyles";
 import React from "react";
+import { ModalActions } from "./modalActions";
 
 const ActionButton = (
   {
@@ -12,27 +13,27 @@ const ActionButton = (
   },
 ) => {
   switch (actionType) {
-    case "criar" : {
+    case ModalActions.CRIAR : {
       return (
         <TouchableOpacity
           style={[styles.modalButton, { backgroundColor: "darkblue" }]}
           onPress={handleCadastro}
         >
-          <Text style={styles.buttonText}>Criar</Text>
+          <Text style={styles.buttonText}>{actionType.charAt(0).toUpperCase() + actionType.slice(1)}</Text>
         </TouchableOpacity>
       );
     }
-    case "deletar" : {
+    case ModalActions.DELETAR : {
       return (
         <TouchableOpacity
           style={[styles.modalButton, { backgroundColor: "red" }]}
           onPress={handleDeletar}
         >
-          <Text style={styles.buttonText}>Deletar</Text>
+          <Text style={styles.buttonText}>Delete</Text>
         </TouchableOpacity>
       );
     }
-    case "conectar" : {
+    case ModalActions.CONECTAR : {
       return (
         <TouchableOpacity
           style={[styles.modalButton, { backgroundColor: "darkgreen" }]}
@@ -42,7 +43,7 @@ const ActionButton = (
         </TouchableOpacity>
       );
     }
-    case "desconectar" : {
+    case ModalActions.DESCONECTAR : {
       return (
         <TouchableOpacity
           style={[styles.modalButton, { backgroundColor: "darkred" }]}
